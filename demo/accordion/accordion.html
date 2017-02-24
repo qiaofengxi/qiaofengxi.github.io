@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        li{
+            list-style: none;
+        }
+        #box{
+            width: 1160px;
+            height:400px;
+            border:1px solid pink;
+            margin:50px auto;
+            overflow: hidden;
+
+        }
+        ul{
+            width:1300px;
+            height:100%;
+        }
+        ul li{
+            width:240px;
+            height:100%;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+
+        </ul>
+    </div>
+</body>
+</html>
+<script src="animate.js"></script>
+<script>
+    var box =document.getElementById("box");
+    var lis = box.children[0].children;
+
+    for(var i=0;i<lis.length;i++){
+        lis[i].style.backgroundImage = "url(images/"+(i+1)+".jpg)";
+        lis[i].onmouseover = function () {
+            for(var i=0;i<lis.length;i++){
+                animate(lis[i],{width:100})
+            }
+            animate(this,{width:800})
+        }
+        lis[i].onmouseout = function () {
+            for(var i=0;i<lis.length;i++){
+                animate(lis[i],{width:240})
+            }
+        }
+    }
+
+
+
+
+//    function animate(obj,json,fn){
+//        clearInterval(obj.timer);
+//        obj.timer = setInterval(function () {
+//            var flag = true;
+//            var current = 0;
+//            var step = 0 ;
+//            for(var attri in json){
+//                if(attri == "opacity"){
+//                    current = parseFloat(getStyle(obj,attri))*100 || 0;
+//                    step = (json[attri]*100 - current)/10;
+//                }
+//                else{
+//                    current = parseInt(getStyle(obj,attri));
+//                    step = (json[attri] - current)/10;
+//                }
+//
+//
+//                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+//
+//                if(attri == "opacity"){
+//                    if("opacity" in obj.style){
+//                        obj.style.opacity = (current + step)/100;
+//                    }
+//                    else
+//                    {
+//                        obj.style.filter = "alpha(opacity="+json[attri]*100+")";
+//                    }
+//                }
+//                else{
+//                    obj.style[attri] = current + step + "px";
+//                }
+//
+//                if(current != json[attri]){
+//                    flag = false;
+//                }
+//            }
+////            console.log("程序进行中");
+//            if(flag){
+//                clearInterval(obj.timer);
+////                console.log("结束了");
+//                if(fn){
+//                    fn();
+//                }
+//            }
+//
+//        },5)
+//
+//    }
+//
+//
+//    function getStyle(obj,attri){
+//        if(obj.currentStyle){
+//            return obj.currentStyle[attri];
+//        }
+//        else{
+//            return window.getComputedStyle(obj,null)[attri];
+//        }
+//    }
+</script>
