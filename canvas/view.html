@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+	<canvas id="canvas" style="border: 1px solid blue"></canvas>
+
+	<script>
+		var searchLight = {
+			x: 400,
+			y: 400,
+			radius: 150,
+			vx: Math.random()*5 + 10,
+			vy: Math.random()*5 + 10
+		};
+		window.onload = function () {
+			var canvas = document.getElementById('canvas');
+			canvas.width = 800;
+			canvas.height = 800;
+			var ctx = canvas.getContext('2d');
+
+
+
+			setInterval(function () {
+				draw(ctx);
+				update(canvas.width, canvas.height);
+			},50);
+
+			function draw(ctx) {
+				var canvas = ctx.canvas;
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.save();
+
+				ctx.beginPath();
+				ctx.fillStyle = 'black';
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+				ctx.beginPath();
+				ctx.arc(searchLight.x, searchLight.y, searchLight.radius, 0, Math.PI * 2);
+				ctx.fillStyle = "#fff";
+				ctx.fill();
+				ctx.clip();
+
+				ctx.font = 'bold 150px Arial';
+				ctx.textAlign = 'center';
+				ctx.baseline = 'middle';
+				ctx.fillStyle = '#058';
+				ctx.fillText('CANVAS', canvas.width / 2, canvas.height /4);
+				ctx.fillText('CANVAS', canvas.width / 2, canvas.height /2);
+				ctx.fillText('CANVAS', canvas.width / 2, canvas.height * 3 / 4);
+
+				ctx.restore();
+			}
+
+			function update(w,h) {
+				searchLight.x += searchLight.vx;
+				searchLight.y += searchLight.vy;
+
+				if (searchLight.x + searchLight.radius > w) {
+					searchLight.vx = -searchLight.vx;
+					searchLight.x = w - searchLight.radius;
+				}
+				if (searchLight.y + searchLight.radius > h) {
+					searchLight.vy = -searchLight.vy;
+					searchLight.y = h - searchLight.radius;
+				}
+				if (searchLight.x < searchLight.radius) {
+					searchLight.vx = -searchLight.vx;
+					searchLight.x = searchLight.radius;
+				}
+				if (searchLight.y < searchLight.radius) {
+					searchLight.vy = -searchLight.vy;
+					searchLight.y = searchLight.radius;
+				}
+			}
+
+			function drawStar(ctx, r, R ,x, y, rotatation) {
+				var rotatation = rotatation || 0;
+				ctx.beginPath();
+				for(var i = 0; i < 5; i++) {
+					ctx.lineTo(Math.cos((18 + i * 72 - rotatation)/ 180 * Math.PI) * R + x,
+							-Math.sin((18 + i * 72 - rotatation) / 180 * Math.PI) * R + y);
+					ctx.lineTo(Math.cos((54 + i * 72 - rotatation)/ 180 * Math.PI) * r + x,
+							-Math.sin((54 + i * 72 - rotatation) / 180 * Math.PI) * r + y);
+				}
+				ctx.closePath();
+				ctx.fillStyle = '#fb3';
+				ctx.strokeStyle = '#fb5';
+				ctx.lineWidth = 3;
+				ctx.lineJoin = 'round';
+
+				ctx.fill();
+				ctx.stroke();
+
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+	<canvas id="canvas" style="border: 1px solid blue;"></canvas>
+
+	<script>
+		window.onload = function () {
+			var canvas = document.getElementById('canvas');
+			canvas.width = 1200;
+			canvas.height = 800;
+			var ctx = canvas.getContext('2d');
+			var skyStyle = ctx.createLinearGradient(0, 0, 0, canvas.height);
+			skyStyle.addColorStop(0.0, 'black');
+			skyStyle.addColorStop(1.0, '#035');
+			ctx.fillStyle = skyStyle;
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			drawGlass(ctx);
+			drawMoon(ctx, 1000, 50, 80);
+
+			for (var i = 0; i < 150; i++) {
+				var r = Math.random() * 5 + 5;
+				var x = Math.random() * canvas.width;
+				var y = Math.random() * canvas.height * 0.55;
+				var rot = Math.random() * 360;
+				drawStar(ctx, r/2, r, x, y, rot);
+			}
+
+
+
+
+
+
+
+			function drawStar(ctx, r, R ,x, y, rotatation) {
+				var rotatation = rotatation || 0;
+				ctx.beginPath();
+				for(var i = 0; i < 5; i++) {
+					ctx.lineTo(Math.cos((18 + i * 72 - rotatation)/ 180 * Math.PI) * R + x,
+							-Math.sin((18 + i * 72 - rotatation) / 180 * Math.PI) * R + y);
+					ctx.lineTo(Math.cos((54 + i * 72 - rotatation)/ 180 * Math.PI) * r + x,
+							-Math.sin((54 + i * 72 - rotatation) / 180 * Math.PI) * r + y);
+				}
+				ctx.closePath();
+				ctx.fillStyle = '#fb3';
+				ctx.strokeStyle = '#fb5';
+				ctx.lineWidth = 3;
+				ctx.lineJoin = 'round';
+
+				ctx.fill();
+				ctx.stroke();
+
+			}
+
+			function drawGlass(ctx) {
+				ctx.save();
+
+				ctx.beginPath();
+				ctx.moveTo(0, 600);
+				ctx.bezierCurveTo(540, 400, 660, 800, 1200, 600);
+				ctx.lineTo(1200, 800);
+				ctx.lineTo(0, 800);
+				ctx.closePath();
+
+				var lendStyle = ctx.createLinearGradient(0, 800, 0,0);
+				lendStyle.addColorStop(0.0, '#030');
+				lendStyle.addColorStop(1.0, '#580');
+				ctx.fillStyle = lendStyle;
+
+				ctx.fill();
+
+				ctx.restore();
+
+			}
+
+			function drawMoon(ctx, x, y, r) {
+				ctx.save();
+
+				ctx.beginPath();
+				ctx.translate(x, y);
+				ctx.rotate( 30 * Math.PI / 180);
+				ctx.arc(0, r, r, Math.PI * 0.5, Math.PI * 1.5, true);
+				ctx.moveTo(0,0);
+				ctx.quadraticCurveTo(r + 10, r, 0, 2 * r);
+				ctx.closePath();
+
+				ctx.fillStyle = '#fb3';
+				ctx.fill();
+
+				ctx.restore();
+
+			}
+		}
+	</script>
+</body>
+</html>
