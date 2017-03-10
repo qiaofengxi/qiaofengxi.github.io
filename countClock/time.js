@@ -7,7 +7,8 @@
 //const LEFT = 100;
 //const TOP = 300;
 
-const endTimer = new Date(2017, 2, 4, 16, 18, 18);
+var endTimer = new Date();
+endTimer.setTime(endTimer.getTime() + 3600 * 1000);
 var curShowSeconds = 0;
 var balls = [];
 const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"];
