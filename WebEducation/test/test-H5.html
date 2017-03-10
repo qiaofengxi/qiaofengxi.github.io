@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1,
+	maximum-scale=1">
+	<title>Title</title>
+	<link rel="stylesheet" href="../css/H5.css">
+	<link rel="stylesheet" href="../css/H5ComponentBase.css">
+	<style>
+		* {
+			padding:0;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+
+	<script src="../js/lib/jquery.js"></script>
+	<script src="../js/lib/jquery-ui.min.js"></script>
+	<script src="../js/lib/jquery.fullPage.js"></script>
+	<script src="../js/H5ComponentBase.js"></script>
+	<script src="../js/H5.js"></script>
+
+	<script>
+		$(function () {
+			var h5 = new H5();
+
+			h5.addPage('face', '首页')
+					.addComponent('mycomponent1', {
+						text: '1',
+						width: 400,
+						height: 100,
+						center: true,
+						css: { backgroundColor: 'red', top: 200, opacity: 0},
+						animateIn: {opacity: 1},
+						animateOut: {opacity: 0}
+					})
+				.addPage('desc', '核心理念')
+					.addComponent('mycomponent2', {
+						text: '2',
+						width: 400,
+						height: 100,
+						center: true,
+						css: { backgroundColor: 'green', top: 300, opacity: 0},
+						animateIn: {opacity: 1},
+						animateOut: {opacity: 0}
+					})
+				.addPage('page3','页面三')
+					.addComponent('mycomponent3', {
+						text: '3',
+						width: 400,
+						height: 100,
+						center: true,
+						css: { backgroundColor: 'pink', top: 400, opacity: 0},
+						animateIn: {opacity: 1},
+						animateOut: {opacity: 0}
+					})
+				.loader();
+
+		});
+	</script>
+</body>
+</html>

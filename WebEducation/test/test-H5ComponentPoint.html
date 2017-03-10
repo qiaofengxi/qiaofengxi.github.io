@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1,
+	maximum-scale=1">
+	<title>Title</title>
+	<link rel="stylesheet" href="../css/H5ComponentBase__point.css">
+	<link rel="stylesheet" href="../css/H5ComponentPoint.css">
+	<style>
+		body {
+			margin:0;
+			padding: 0;
+			background-color: #000;
+		}
+		.iphone {
+			width: 340px;
+			height: 540px;
+			background-color: #fff;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin: -270px 0 0 -170px;
+		}
+
+	</style>
+</head>
+<body>
+<div class="iphone"></div>
+<script src="../js/lib/jquery.js"></script>
+<script src="../js/H5ComponentBase__point.js"></script>
+<script src="../js/H5ComponentPoint.js"></script>
+<script>
+	var cfg = {
+		type: 'Point',
+		width: 300,
+		height: 300,
+		center: true,
+		data: [
+			['A项', .4, 'green'],
+			['B项', .2, 'yellow', '-20%', '-50%'],
+			['C项', .2, 'red', '-20%', '100%']
+		],
+		css: {
+			bottom: 0,
+			bottom: '40%',
+			opacity: 0
+		},
+		animateIn: {opacity: 1},
+		animateOut: {opacity: 0}
+	};
+
+	var component = new H5ComponentPoint('myName',cfg);
+	$('.iphone').append(component);
+
+	var onLoad = false;
+	$('body').on('click', function () {
+		onLoad = !onLoad;
+		$('.h5_component').trigger(onLoad ? 'onLoad' : 'onLeave');
+	});
+</script>
+
+
+</body>
+</html>
